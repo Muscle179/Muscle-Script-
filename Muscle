@@ -1,0 +1,38 @@
+-- AutoLifft script--
+
+local liftPart = game.Workspace.LiftPart  -- The part that will be lifted
+local liftSpeed = 1000                    -- Speed of the lift in studs per second
+local liftHeight = 50                    -- Height to lift the part
+local liftDuration = 5                   -- Time to wait before reversing the lift
+
+-- Function to lift the part
+local function liftPartUp()
+    local startPosition = liftPart.Position
+    local endPosition = startPosition + Vector3.new(0, liftHeight, 0)
+    
+    -- Lifting up the part
+    for i = 1, liftHeight, liftSpeed do
+        liftPart.Position = startPosition + Vector3.new(0, i, 0)
+        wait(0.1)  -- Wait for a short time to simulate the movement
+    end
+end
+
+-- Function to lower the part
+local function lowerPart()
+    local startPosition = liftPart.Position
+    local endPosition = startPosition - Vector3.new(0, liftHeight, 0)
+
+    -- Lowering the part back down
+    for i = liftHeight, 0, -liftSpeed do
+        liftPart.Position = startPosition - Vector3.new(0, i, 0)
+        wait(0.1)  -- Wait for a short time to simulate the movement
+    end
+end
+
+-- Loop the auto lift process
+while true do
+    liftPartUp()          -- Lift up the part
+    wait(liftDuration)    -- Wait for the part to be lifted
+    lowerPart()           -- Lower the part down
+    wait(liftDuration)    -- Wait before starting again
+end
