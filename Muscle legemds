@@ -1,0 +1,58 @@
+
+local function AutoStrength()
+    while true do
+        game:GetService("ReplicatedStorage").rEvents.liftWeightRemote:FireServer()
+        wait(0.05) -- Faster strength gain
+    end
+end
+
+local function AutoRebirth()
+    while true do
+        game:GetService("ReplicatedStorage").rEvents.rebirthEvent:FireServer()
+        wait(5) -- Faster rebirth
+    end
+end
+
+local function AutoAgility()
+    while true do
+        game:GetService("ReplicatedStorage").rEvents.swingFistRemote:FireServer()
+        wait(0.05) -- Faster agility gain
+    end
+end
+
+-- GUI Creation
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local AutoStrengthButton = Instance.new("TextButton")
+local AutoRebirthButton = Instance.new("TextButton")
+local AutoAgilityButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game.CoreGui
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.Size = UDim2.new(0, 200, 0, 150)
+Frame.Position = UDim2.new(0.5, -100, 0.5, -75)
+
+AutoStrengthButton.Parent = Frame
+AutoStrengthButton.Size = UDim2.new(0, 180, 0, 40)
+AutoStrengthButton.Position = UDim2.new(0, 10, 0, 10)
+AutoStrengthButton.Text = "Auto Strength (Fast)"
+AutoStrengthButton.MouseButton1Click:Connect(function()
+    spawn(AutoStrength)
+end)
+
+AutoRebirthButton.Parent = Frame
+AutoRebirthButton.Size = UDim2.new(0, 180, 0, 40)
+AutoRebirthButton.Position = UDim2.new(0, 10, 0, 60)
+AutoRebirthButton.Text = "Auto Rebirth (Fast)"
+AutoRebirthButton.MouseButton1Click:Connect(function()
+    spawn(AutoRebirth)
+end)
+
+AutoAgilityButton.Parent = Frame
+AutoAgilityButton.Size = UDim2.new(0, 180, 0, 40)
+AutoAgilityButton.Position = UDim2.new(0, 10, 0, 110)
+AutoAgilityButton.Text = "Auto Agility (Fast)"
+AutoAgilityButton.MouseButton1Click:Connect(function()
+    spawn(AutoAgility)
+end)
