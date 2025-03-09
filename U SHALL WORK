@@ -1,0 +1,39 @@
+-- Auto Lift Script for Muscle Legends
+
+local player = game.Players.LocalPlayer  -- Access the local player
+local playerGui = player:WaitForChild("PlayerGui")  -- Access the PlayerGui
+local autoLiftButton = playerGui:WaitForChild("AutoLiftButton")  -- Assume there's a button that simulates lifting action
+
+local liftInterval = 0.5  -- Time interval between lifts (in seconds)
+local isAutoLifting = false  -- Flag to check if auto-lifting is active
+
+-- Function to simulate a lift action (this would be tied to actual game mechanics)
+local function simulateLift()
+    -- For the sake of the script, we're pretending the button gets clicked by the player
+    autoLiftButton.MouseButton1Click:Fire()  -- Simulate mouse click on the AutoLiftButton
+end
+
+-- Toggle Auto Lift
+local function toggleAutoLift()
+    isAutoLifting = not isAutoLifting  -- Toggle the status of auto-lifting
+    if isAutoLifting then
+        while isAutoLifting do
+            simulateLift()  -- Simulate the lifting action
+            wait(liftInterval)  -- Wait for the interval before the next lift
+        end
+    end
+end
+
+-- Function to stop auto-lift (if needed)
+local function stopAutoLift()
+    isAutoLifting = false  -- Stop auto-lifting
+end
+
+-- Triggering auto-lift when a key is pressed (for example 'F')
+game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end  -- Ignore input if the game processed it
+
+    if input.KeyCode == Enum.KeyCode.F then  -- Press 'F' to toggle auto-lift
+        toggleAutoLift()
+    end
+end)
